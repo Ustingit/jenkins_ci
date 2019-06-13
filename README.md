@@ -2,6 +2,8 @@
 ## What inside
 - [Dockerfile for Jenkis image](./Dockerfile) - wil be as source for Jenkins deployment in the cluster
 
+> User/pass for Jenkins: user/super_pass
+
 ## K8s deployment
 For k8s deployment you can use kubespray, or, for testing - minikube.
 How to install minikube:
