@@ -1,7 +1,7 @@
 version: '2'
 services:
   jenkins:
-    image: pluhin31/jenkins_ci:latest
+    image: pluhin31/jenkins_ci:icinga2
     container_name: jenkins_plu
     user: jenkins
     volumes:
