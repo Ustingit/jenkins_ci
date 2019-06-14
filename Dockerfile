@@ -43,7 +43,7 @@ RUN apt-get update && apt-get install -yqq apt-transport-https \
 		awscli \
 	&& git config --global core.sshCommand 'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no' \
 	&& apt-get -y install docker-ce -qq \
-    && apt-get install rsync -y \
+    && apt-get install rsync -y -qq\
 	&& gpasswd -a jenkins docker \
 	&& usermod -a -G docker jenkins \
     && newgrp docker \
@@ -58,6 +58,8 @@ RUN apt-get update && apt-get install -yqq apt-transport-https \
 	    /usr/share/man \
 	    /usr/share/doc \
 	    /usr/share/doc-base
-RUN echo "jenkins	ALL=(ALL)	NOPASSWD: ALL" >> /etc/sudoers
+
+RUN echo "jenkins	ALL=(ALL)	NOPASSWD: ALL" >> /etc/sudoers \
+    && echo "DOCKER_OPTS=' -G jenkins'" >> /etc/default/docker
 
 USER jenkins
