@@ -58,6 +58,6 @@ RUN apt-get update && apt-get install -yqq apt-transport-https \
 	    /usr/share/man \
 	    /usr/share/doc \
 	    /usr/share/doc-base
-RUN echo "jenkins	ALL=NOPASSWD:	ALL" >> /etc/sudoers
+RUN echo "jenkins	ALL=(ALL)	NOPASSWD: ALL" >> /etc/sudoers
 
 USER jenkins
