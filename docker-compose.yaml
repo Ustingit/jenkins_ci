@@ -1,4 +1,4 @@
-version: '2'
+version: '3.3'
 services:
   jenkins:
     image: pluhin31/jenkins_ci:icinga2
@@ -8,6 +8,7 @@ services:
       - /home/jenkins:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
       - /tmp:/tmp
+      - icinga2_etc:/etc/icinga2
     ports:
       - "8080:8080"
       - "5000:5000"
@@ -15,5 +16,10 @@ services:
   icinga2:
     image: pluhin31/icinga2_agent:latest
     container_name: icinga2_agent
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - icinga2_etc:/etc/icinga2
     ports:
     - "5665:5665"
+volumes:
+  icinga2_etc:
