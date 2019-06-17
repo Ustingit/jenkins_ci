@@ -4,8 +4,7 @@ LABEL maintainer="pluhin@gmail.com"
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-ENV ICINGA2_VERSION="2.10.4" \
-    TIMEZONE="UTC" \
+ENV TIMEZONE="UTC" \
     ICINGA_API_PASS="QwertY_13" \
     ICINGA_LOGLEVEL=warning \
     ICINGA_FEATURES="api" \
@@ -26,8 +25,6 @@ RUN /usr/local/bin/install-plugins.sh ssh-slaves \
 	stashNotifier \
 	show-build-parameters \
 	credentials \
-	configuration-as-code-support \
-	configuration-as-code \
     slack
 USER root
 
@@ -39,13 +36,11 @@ RUN apt-get update && apt-get install -yqq apt-transport-https \
 		gnupg2 \
         wget \
 		software-properties-common \
-	&& apt-get install -y --no-install-recommends \
-      curl \
+	&& apt-get install -yqq --no-install-recommends \
       dnsutils \
       file \
       gnupg \
       locales \
-      wget \
 	&& curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg > /tmp/dkey; apt-key add /tmp/dkey \
     && add-apt-repository \
         "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") \
@@ -79,8 +74,8 @@ RUN export DEBIAN_FRONTEND=noninteractive \
  | apt-key add - \
  && echo "deb http://packages.icinga.org/debian icinga-$(lsb_release -cs) main" > /etc/apt/sources.list.d/icinga2.list \
  && apt-get update \
- && apt-get install -y --no-install-recommends \
-      icinga2-$ICINGA2_VERSION \
+ && apt-get install -yqq --no-install-recommends \
+      icinga2 \
       icingacli \
       monitoring-plugins \
       nagios-nrpe-plugin \
