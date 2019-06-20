@@ -24,7 +24,7 @@ for f in ${ICINGA_FEATURES} ; do
     icinga2 api setup
     if [ ! -e /etc/icinga2/conf.d/api-users.conf ] ; then
       # Create api user for Icingaweb2
-      cp /temp/api-users.conf /etc/icinga2/conf.d/api-users.conf
+      cp /tmp/api-users.conf /etc/icinga2/conf.d/api-users.conf
       sed -r -i \
         "s/^[ \t\/]*password = .*/  password = \"${ICINGA_API_PASS}\",/g" \
         /etc/icinga2/conf.d/api-users.conf
@@ -34,8 +34,8 @@ for f in ${ICINGA_FEATURES} ; do
     icinga2 feature enable ${f}
   fi
 done
-mkdir -p /run/icinga2
-chown icinga /run/icinga2 -R
+#sudo mkdir -p /run/icinga2
+#sudo chown icinga /run/icinga2 -R
 sed -r -i \
         "s/^[ \t\/]*password = .*/  password = \"${ICINGA_API_PASS}\",/g" \
         /etc/icinga2/conf.d/api-users.conf
@@ -43,5 +43,8 @@ sed -r -i \
 # Run Icinga2 daemon
 
 echo 'Start Icinga2 Daemon'
-exec dumb-init -- su icinga -c \
+exec dumb-init -- \
   "icinga2 daemon --log-level ${ICINGA_LOGLEVEL:-warning} --include /etc/icinga2"
+
+#exec dumb-init -- su icinga -c \
+#  "icinga2 daemon --log-level ${ICINGA_LOGLEVEL:-warning} --include /etc/icinga2"
