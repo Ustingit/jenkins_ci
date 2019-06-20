@@ -81,4 +81,6 @@ RUN icinga2 api setup
 RUN echo "jenkins	ALL=(ALL)	NOPASSWD: ALL" >> /etc/sudoers \
     && echo "DOCKER_OPTS=' -G jenkins'" >> /etc/default/docker
 
+VOLUME [ "/var/lib/icinga2" ]
+
 USER jenkins
