@@ -1,8 +1,7 @@
 version: '3.3'
 services:
   jenkins:
-    image: image_test
-    #    image: pluhin31/jenkins_ci:icinga2
+    image: pluhin31/jenkins_ci:icinga2
     container_name: jenkins_plu
     user: jenkins
     volumes:

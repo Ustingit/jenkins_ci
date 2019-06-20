@@ -56,6 +56,7 @@ RUN apt-get update && apt-get install -yqq apt-transport-https \
  	&& apt-get update \
  	&& apt-get install -yqq \
       icinga2 \
+	  icinga2-ido-mysql \
       monitoring-plugins \
       nagios-nrpe-plugin \
       nagios-plugins-contrib \
@@ -75,6 +76,7 @@ RUN apt-get update && apt-get install -yqq apt-transport-https \
 	    /usr/share/doc \
 	    /usr/share/doc-base
 
+RUN icinga2 api setup
 
 RUN echo "jenkins	ALL=(ALL)	NOPASSWD: ALL" >> /etc/sudoers \
     && echo "DOCKER_OPTS=' -G jenkins'" >> /etc/default/docker
